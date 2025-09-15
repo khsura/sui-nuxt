@@ -15,13 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: "yarn"
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Set token npm github token
         run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
@@ -41,13 +41,13 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - uses: actions/setup-node@v5
         with:
           node-version: 20
           cache: "yarn"
-
-      - name: Enable Corepack
-        run: corepack enable
 
       - name: Set token npm github token
         run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
