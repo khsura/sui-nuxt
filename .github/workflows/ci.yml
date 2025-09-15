@@ -18,15 +18,16 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 20
-
-      - name: Set token npm github token
-        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
+          cache: "yarn"
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Use Stable Yarn
-        run: yarn set version stable
+      - name: Set token npm github token
+        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
+
+      - name: Prepare Yarn version
+        run: corepack prepare yarn@4.9.4 --activate
 
       - name: Install dependencies
         run: yarn install
@@ -43,15 +44,16 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 20
-
-      - name: Set token npm github token
-        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
+          cache: "yarn"
 
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Use Stable Yarn
-        run: yarn set version stable
+      - name: Set token npm github token
+        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
+
+      - name: Prepare Yarn version
+        run: corepack prepare yarn@4.9.4 --activate
 
       - name: Install dependencies
         run: yarn install
