@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Set token npm github token
+        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
+
       - name: Enable Corepack
         run: corepack enable
 
@@ -37,6 +40,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 20
+
+      - name: Set token npm github token
+        run: echo NPM_GITHUB_TOKEN=${{ secrets.NPM_GITHUB_TOKEN }} > .env.yarn
 
       - name: Enable Corepack
         run: corepack enable
