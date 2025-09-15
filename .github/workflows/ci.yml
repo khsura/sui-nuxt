@@ -19,13 +19,14 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm i -g --force corepack@latest && corepack enable
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
-        run: npx nypm@latest i
+        run: yarn install
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
   test:
     runs-on: ubuntu-latest
@@ -37,13 +38,14 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm i -g --force corepack@latest && corepack enable
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
-        run: npx nypm@latest i
+        run: yarn install
 
       - name: Playground prepare
-        run: npm run dev:prepare
+        run: yarn dev:prepare
 
       - name: Test
-        run: npm run test
+        run: yarn test
