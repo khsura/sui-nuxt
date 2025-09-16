@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Import bug ([23cc557](https://github.com/khsura/sui-nuxt/commit/23cc557))
+- Skip test ([e1be44e](https://github.com/khsura/sui-nuxt/commit/e1be44e))
+- Bug ([cdef680](https://github.com/khsura/sui-nuxt/commit/cdef680))
+
+### ❤️ Contributors
+
+- Sura Kh <sura0111@gmail.com>
+
 ## v1.1.0
 
 
