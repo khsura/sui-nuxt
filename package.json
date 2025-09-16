@@ -34,12 +34,13 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@nuxt/kit": "^4.1.2"
+    "@khsura/sui": "^1.6.1",
+    "sass-embedded": "^1.92.1"
   },
   "devDependencies": {
-    "@khsura/sui": "^1.6.0",
     "@nuxt/devtools": "^2.6.3",
     "@nuxt/eslint-config": "^1.9.0",
+    "@nuxt/kit": "^4.1.2",
     "@nuxt/module-builder": "^1.0.2",
     "@nuxt/schema": "^4.1.2",
     "@nuxt/test-utils": "^3.19.2",

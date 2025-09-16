@@ -121,6 +121,7 @@ export default defineNuxtModule<AppStateOptions>({
 
     addPlugin(resolver.resolve('./runtime/plugin'))
 
+    nuxt.options.css.unshift('@khsura/sui/style.scss')
     nuxt.options.css.unshift('@khsura/sui/style.css')
   },
 })
