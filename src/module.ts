@@ -1,3 +1,4 @@
+import type { AppStateOptions } from '@khsura/sui'
 import {
   addImports,
   defineNuxtModule,
@@ -5,7 +6,6 @@ import {
   addPlugin,
   addComponent,
 } from '@nuxt/kit'
-import type { AppStateOptions } from '../../app/@types'
 
 export default defineNuxtModule<AppStateOptions>({
   meta: {
@@ -119,7 +119,7 @@ export default defineNuxtModule<AppStateOptions>({
       }),
     ])
 
-    addPlugin(resolver.resolve('./runtime/plugin.ts'))
+    addPlugin(resolver.resolve('./runtime/plugin'))
 
     nuxt.options.css.unshift('@khsura/sui/style.css')
   },
