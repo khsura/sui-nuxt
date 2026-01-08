@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.1.3
+
+[compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.1...v1.1.3)
+
+### 🩹 Fixes
+
+- Bug ([e82d053](https://github.com/khsura/sui-nuxt/commit/e82d053))
+- Bug ([3cf8e4c](https://github.com/khsura/sui-nuxt/commit/3cf8e4c))
+
+### ❤️ Contributors
+
+- Sura Kh <sura0111@gmail.com>
+
 ## v1.1.1
 
 [compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.0...v1.1.1)
