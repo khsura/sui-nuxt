@@ -1074,7 +1074,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@khsura/sui-nuxt@workspace:."
   dependencies:
-    "@khsura/sui": "npm:^1.7.7"
+    "@khsura/sui": "npm:^1.7.12-beta.1"
     "@nuxt/devtools": "npm:^3.1.1"
     "@nuxt/eslint-config": "npm:^1.12.1"
     "@nuxt/kit": "npm:^4.2.2"
@@ -1092,17 +1092,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@khsura/sui@npm:^1.7.7":
-  version: 1.7.7
-  resolution: "@khsura/sui@npm:1.7.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40khsura%2Fsui%2F1.7.7%2Fbe5f0fb29605a3a181135d7129a75d9fc9875605"
+"@khsura/sui@npm:^1.7.12-beta.1":
+  version: 1.7.12-beta.1
+  resolution: "@khsura/sui@npm:1.7.12-beta.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40khsura%2Fsui%2F1.7.12-beta.1%2F2d18b4b386c323d66e58fd659621cc977bd211b4"
   dependencies:
     "@vueuse/components": "npm:^14.1.0"
     "@vueuse/core": "npm:^14.1.0"
     dayjs: "npm:^1.11.19"
+    uuid: "npm:^13.0.0"
     vue: "npm:^3.5.26"
-    vue-i18n: "npm:^11.2.7"
-    zod: "npm:^4.2.1"
-  checksum: 10/20774e0e25f4bb9714a9276fb935d83bcfed89269a7afab49fd0aa3335578cf874cbdb6555da96bd6bc6299546ecf4082ea23813f23e3a289597448e5e4942d8
+    vue-i18n: "npm:^11.2.8"
+    zod: "npm:^4.3.5"
+  checksum: 10/6aa3cd6c4c601188d56252e6eb7d6257a4b031985543df641033c831667f3cf1db95a15ff936d21ad4519042f9d8c8b5c03babb82a96560f718583424f8b9485
   languageName: node
   linkType: hard
 
@@ -9670,6 +9671,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"uuid@npm:^13.0.0":
+  version: 13.0.0
+  resolution: "uuid@npm:13.0.0"
+  bin:
+    uuid: dist-node/bin/uuid
+  checksum: 10/2742b24d1e00257e60612572e4d28679423469998cafbaf1fe9f1482e3edf9c40754b31bfdb3d08d71b29239f227a304588f75210b3b48f2609f0673f1feccef
+  languageName: node
+  linkType: hard
+
 "varint@npm:^6.0.0":
   version: 6.0.0
   resolution: "varint@npm:6.0.0"
@@ -9962,7 +9972,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-i18n@npm:^11.2.7":
+"vue-i18n@npm:^11.2.8":
   version: 11.2.8
   resolution: "vue-i18n@npm:11.2.8"
   dependencies:
@@ -10249,9 +10259,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zod@npm:^4.2.1":
-  version: 4.3.5
-  resolution: "zod@npm:4.3.5"
-  checksum: 10/3148bd52e56ab7c1641ec397e6be6eddbb1d8f5db71e95baab9bb9622a0ea49d8a385885fc1c22b90fa6d8c5234e051f4ef5d469cfe3fb90198d5a91402fd89c
+"zod@npm:^4.3.5":
+  version: 4.3.6
+  resolution: "zod@npm:4.3.6"
+  checksum: 10/25fc0f62e01b557b4644bf0b393bbaf47542ab30877c37837ea8caf314a8713d220c7d7fe51f68ffa72f0e1018ddfa34d96f1973d23033f5a2a5a9b6b9d9da01
   languageName: node
   linkType: hard
