@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.4
+
+[compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.3...v1.1.4)
+
+### 🩹 Fixes
+
+- Add default component ([e0eb556](https://github.com/khsura/sui-nuxt/commit/e0eb556))
+
+### ❤️ Contributors
+
+- Sura Kh <sura0111@gmail.com>
+
 ## v1.1.3
 
 [compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.1...v1.1.3)
