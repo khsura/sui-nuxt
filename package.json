@@ -34,7 +34,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@khsura/sui": "^1.7.12-beta.1",
+    "@khsura/sui": "^1.7.14",
     "sass-embedded": "^1.97.2"
   },
   "devDependencies": {

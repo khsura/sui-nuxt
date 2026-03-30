@@ -22,6 +22,7 @@ export default defineNuxtModule<AppStateOptions>({
 
     await Promise.all(
       [
+        'SAlert',
         'SApp',
         'SAppBar',
         'SAutocomplete',
@@ -40,6 +41,7 @@ export default defineNuxtModule<AppStateOptions>({
         'SColumn',
         'SContainer',
         'SDatePicker',
+        'SDatePickerInput',
         'SDialog',
         'SDivider',
         'SExpansionPanel',
