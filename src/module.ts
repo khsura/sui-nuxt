@@ -8,6 +8,14 @@ import {
 } from '@nuxt/kit'
 import { suiComponentNames, suiTypeImports, suiValueImports } from './components'
 
+// Type `runtimeConfig.public.sui` as the module's options. Without this, Nuxt infers the type
+// from the app's literal config (e.g. `theme: string`), which `createSUI` does not accept.
+declare module '@nuxt/schema' {
+  interface PublicRuntimeConfig {
+    sui: AppStateOptions
+  }
+}
+
 export default defineNuxtModule<AppStateOptions>({
   meta: {
     name: 'sui',
