@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.1.6
+
+[compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.5...v1.1.6)
+
+### 🩹 Fixes
+
+- Register every @khsura/sui component and fix the type auto-import ([4ad6d13](https://github.com/khsura/sui-nuxt/commit/4ad6d13))
+- Type runtimeConfig.public.sui as AppStateOptions ([549b14f](https://github.com/khsura/sui-nuxt/commit/549b14f))
+
+### ❤️ Contributors
+
+- Sura Kh <sura0111@gmail.com>
+
 ## v1.1.5
 
 [compare changes](https://github.com/khsura/sui-nuxt/compare/v1.1.4...v1.1.5)
