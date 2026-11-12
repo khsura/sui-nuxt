@@ -1,84 +1,77 @@
-<!--
-Get your module up and running quickly.
+# @khsura/sui-nuxt
 
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Module
-- Package name: my-module
-- Description: My new Nuxt module
--->
+Nuxt module for [`@khsura/sui`](https://github.com/khsura/sui), the Vue 3 component framework. Component docs and live examples: [sui.surakh.com](https://sui.surakh.com).
 
-# My Module
+- [Release notes](/CHANGELOG.md)
 
-[![npm version][npm-version-src]][npm-version-href]
-[![npm downloads][npm-downloads-src]][npm-downloads-href]
-[![License][license-src]][license-href]
-[![Nuxt][nuxt-src]][nuxt-href]
+## What it does
 
-My new Nuxt module for doing amazing things.
+- Calls `createSUI()` with the options under `sui` in `nuxt.config.ts`
+- Registers every `@khsura/sui` component globally (`SButton`, `SCard`, `SLayout`, …), so templates need no imports
+- Auto-imports `useDisplay`, `useTheme`, `STransition`, and the types `FormInputModelValueRule`, `GroupItemValue`, `MaterialDesignIcon`, `SForm`, `SInput`, `SSelect`, `TableHeader`, `TableItem`
+- Loads the SUI styles (`@khsura/sui/style.css` and `@khsura/sui/style.scss`)
+- Provides `useNuxtApp().$suiFormRules`, the predefined form rules built from `@nuxtjs/i18n`
 
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-<!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-module?file=playground%2Fapp.vue) -->
-<!-- - [📖 &nbsp;Documentation](https://example.com) -->
+Requires Nuxt 4 or later.
 
-## Features
+## Setup
 
-<!-- Highlight some of the features your module provide here -->
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+Both packages are published to **GitHub Packages**, not npmjs.com. Point the `@khsura` scope at that registry and supply a GitHub token with the `read:packages` scope:
 
-## Quick Setup
-
-Install the module to your Nuxt application with one command:
-
-```bash
-npx nuxi module add my-module
+```yaml
+# .yarnrc.yml (Yarn 4)
+npmScopes:
+  khsura:
+    npmRegistryServer: "https://npm.pkg.github.com"
+    npmAlwaysAuth: true
+    npmAuthToken: "${NPM_GITHUB_TOKEN}"
 ```
 
-That's it! You can now use My Module in your Nuxt app ✨
+```ini
+# .npmrc (npm / pnpm)
+@khsura:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NPM_GITHUB_TOKEN}
+```
 
+Install, together with the icon font that `SIcon` uses:
 
-## Contribution
+```bash
+yarn add @khsura/sui @khsura/sui-nuxt @mdi/font
+```
 
-<details>
-  <summary>Local development</summary>
-  
-  ```bash
-  # Install dependencies
-  npm install
-  
-  # Generate type stubs
-  npm run dev:prepare
-  
-  # Develop with the playground
-  npm run dev
-  
-  # Build the playground
-  npm run dev:build
-  
-  # Run ESLint
-  npm run lint
-  
-  # Run Vitest
-  npm run test
-  npm run test:watch
-  
-  # Release new version
-  npm run release
-  ```
+```ts
+// nuxt.config.ts
+export default defineNuxtConfig({
+  modules: ['@khsura/sui-nuxt'],
+  css: ['@mdi/font/css/materialdesignicons.css'],
+  sui: {
+    // AppStateOptions for createSUI(): theme, themes, components, display
+    theme: 'light',
+  },
+})
+```
 
-</details>
+Wrap the app in `SApp`; it sets the theme colors and holds the container popups render into:
 
+```vue
+<!-- app.vue -->
+<template>
+  <SApp>
+    <NuxtPage />
+  </SApp>
+</template>
+```
 
-<!-- Badges -->
-[npm-version-src]: https://img.shields.io/npm/v/my-module/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/my-module
+`$suiFormRules` needs [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/) installed.
 
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/my-module
+## Development
 
-[license-src]: https://img.shields.io/npm/l/my-module.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/my-module
+```bash
+yarn install         # needs NPM_GITHUB_TOKEN (see .yarnrc.yml)
+yarn dev:prepare     # generate type stubs
+yarn dev             # playground
+yarn lint
+yarn test
+```
 
-[nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
-[nuxt-href]: https://nuxt.com
+The registered components live in `src/components.ts`. `test/components.test.ts` fails when that list and the exports of the installed `@khsura/sui` differ, so update the list when you upgrade `@khsura/sui`.
