@@ -1,0 +1,53 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # npm Trusted Publishing (OIDC): no npm token, provenance attached automatically
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Debug release output
+        run: |
+          echo "Release Created: $RELEASE_CREATED"
+        env:
+          RELEASE_CREATED: ${{ steps.release.outputs.release_created }}
+
+      - uses: actions/checkout@v5
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Use Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "24" # ships npm >= 11.5.1, required for Trusted Publishing
+          registry-url: "https://registry.npmjs.org"
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Enable Corepack
+        run: corepack enable
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Install dependencies
+        run: yarn install --immutable
+        if: ${{ steps.release.outputs.release_created }}
+
+      # Builds the module (`prepack` runs during `npm publish`) and publishes it to public npm,
+      # skipping a version that is already there.
+      # Auth: npm Trusted Publishing for khsura/sui-nuxt + release-please.yaml (configured on npmjs.com), no secret.
+      - name: Run publish
+        run: yarn release
+        if: ${{ steps.release.outputs.release_created }}
