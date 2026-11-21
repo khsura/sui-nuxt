@@ -2,7 +2,14 @@
   "name": "@khsura/sui-nuxt",
   "version": "1.1.6",
   "description": "SUI Nuxt module",
-  "repository": "khsura/sui-nuxt",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khsura/sui-nuxt.git"
+  },
+  "homepage": "https://github.com/khsura/sui-nuxt#readme",
+  "bugs": {
+    "url": "https://github.com/khsura/sui-nuxt/issues"
+  },
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,32 +29,36 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "prepack": "nuxt-module-build build",
     "dev": "yarn dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "yarn lint && yarn test && yarn prepack && changelogen --release && yarn npm publish && git push --follow-tags",
+    "release": "node scripts/publishIfNew.mjs",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@khsura/sui": "^1.18.0",
+    "@khsura/sui": "^1.19.0",
     "sass-embedded": "^1.97.2"
   },
   "devDependencies": {
+    "@nuxt/cli": "^4.0.3",
     "@nuxt/devtools": "^3.1.1",
     "@nuxt/eslint-config": "^1.12.1",
-    "@nuxt/kit": "^4.2.2",
+    "@nuxt/kit": "^4.6.4",
     "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.2.2",
-    "@nuxt/test-utils": "^3.23.0",
+    "@nuxt/schema": "^4.6.4",
+    "@nuxt/test-utils": "^4.4.0",
     "@types/node": "^25.0.3",
-    "changelogen": "^0.6.2",
     "eslint": "^9.39.2",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.6.4",
     "typescript": "~5.9.3",
     "vitest": "^4.0.16",
     "vue-tsc": "^3.2.2"

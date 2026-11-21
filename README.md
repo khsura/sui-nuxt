@@ -16,27 +16,10 @@ Requires Nuxt 4 or later.
 
 ## Setup
 
-Both packages are published to **GitHub Packages**, not npmjs.com. Point the `@khsura` scope at that registry and supply a GitHub token with the `read:packages` scope:
-
-```yaml
-# .yarnrc.yml (Yarn 4)
-npmScopes:
-  khsura:
-    npmRegistryServer: "https://npm.pkg.github.com"
-    npmAlwaysAuth: true
-    npmAuthToken: "${NPM_GITHUB_TOKEN}"
-```
-
-```ini
-# .npmrc (npm / pnpm)
-@khsura:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NPM_GITHUB_TOKEN}
-```
-
-Install, together with the icon font that `SIcon` uses:
+Both packages are on the public npm registry. No registry config or token is needed. Install them together with the icon font that `SIcon` uses:
 
 ```bash
-yarn add @khsura/sui @khsura/sui-nuxt @mdi/font
+npm i @khsura/sui-nuxt @khsura/sui @mdi/font   # or: yarn add / pnpm add
 ```
 
 ```ts
@@ -64,14 +47,30 @@ Wrap the app in `SApp`; it sets the theme colors and holds the container popups 
 
 `$suiFormRules` needs [`@nuxtjs/i18n`](https://i18n.nuxtjs.org/) installed.
 
+### Migrating from GitHub Packages
+
+Versions up to 1.1.6 were published to GitHub Packages. If your project still points the `@khsura` scope there, remove that config. Otherwise installs keep going to the old registry and fail with 404 or 401 for new versions:
+
+- `.npmrc` (npm / pnpm): delete the `@khsura:registry=...` line that points at `npm.pkg.github.com`, and its `//npm.pkg.github.com/:_authToken=...` line.
+- `.yarnrc.yml` (Yarn 4): delete the `npmScopes.khsura` block (`npmRegistryServer`, `npmAlwaysAuth`, `npmAuthToken`). Yarn also reads `.yarnrc.yml` files in parent folders and in your home folder, so check `~/.yarnrc.yml` too.
+- CI: you no longer need the GitHub token secret that your install step used for `@khsura` packages.
+
+Then reinstall so the lockfile resolves `@khsura/*` from npmjs.com.
+
 ## Development
 
 ```bash
-yarn install         # needs NPM_GITHUB_TOKEN (see .yarnrc.yml)
+yarn install
 yarn dev:prepare     # generate type stubs
 yarn dev             # playground
 yarn lint
+yarn test:types      # vue-tsc for the module and the playground
 yarn test
+yarn dev:build       # build the playground
 ```
+
+## Release
+
+Releases are automated by [release-please](https://github.com/googleapis/release-please). When conventional commits (`feat:`, `fix:` and so on) are merged to `main`, it opens a release PR that bumps the version and updates `CHANGELOG.md`. Merging that PR tags the release and publishes `@khsura/sui-nuxt` to public npm through **npm Trusted Publishing** (GitHub OIDC, configured on npmjs.com for `khsura/sui-nuxt` and `release-please.yaml`). No npm token or secret is involved, and npm attaches provenance automatically. `scripts/publishIfNew.mjs` skips a version that is already on npm.
 
 The registered components live in `src/components.ts`. `test/components.test.ts` fails when that list and the exports of the installed `@khsura/sui` differ, so update the list when you upgrade `@khsura/sui`.

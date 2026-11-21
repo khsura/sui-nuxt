@@ -1,0 +1,62 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - main
+
+# Nothing by default; each job asks only for what it needs.
+permissions: {}
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
+        id: release
+        with:
+          token: ${{ secrets.RELEASE_PLEASE_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+      - name: Debug release output
+        run: |
+          echo "Release Created: $RELEASE_CREATED"
+        env:
+          RELEASE_CREATED: ${{ steps.release.outputs.release_created }}
+
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm Trusted Publishing (OIDC): no npm token, provenance attached automatically
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          persist-credentials: false
+
+      - name: Use Node.js
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
+        with:
+          node-version: "24" # ships npm >= 11.5.1, required for Trusted Publishing
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      # --mode=skip-build: dependency lifecycle scripts never run in the job that holds the OIDC token.
+      - name: Install dependencies
+        run: yarn install --immutable --mode=skip-build
+
+      # Builds the module (`prepack` runs during `npm publish`) and publishes it to public npm,
+      # skipping a version that is already there.
+      # Auth: npm Trusted Publishing for khsura/sui-nuxt + release-please.yaml (configured on npmjs.com), no secret.
+      - name: Run publish
+        run: yarn release

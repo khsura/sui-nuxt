@@ -7,9 +7,22 @@ describe('ssr', async () => {
     rootDir: fileURLToPath(new URL('./fixtures/basic', import.meta.url)),
   })
 
-  it.skip('renders the index page', async () => {
-    // Get response to a server-rendered page with `$fetch`.
-    const html = await $fetch('/')
-    expect(html).toContain('<div>basic</div>')
+  it('renders globally registered SUI components', async () => {
+    const html = await $fetch<string>('/')
+
+    expect(html).toContain('id="card"')
+    expect(html).toContain('basic')
+  })
+
+  it('renders an SButton with `to` as a router link', async () => {
+    const html = await $fetch<string>('/')
+
+    expect(html).toMatch(/<a[^>]*href="\/about"[^>]*id="router-button"|<a[^>]*id="router-button"[^>]*href="\/about"/)
+  })
+
+  it('serves the linked route', async () => {
+    const html = await $fetch<string>('/about')
+
+    expect(html).toContain('id="about"')
   })
 })
