@@ -1,6 +1,5 @@
 <template>
-  <div>basic</div>
+  <SApp>
+    <NuxtPage />
+  </SApp>
 </template>
-
-<script setup>
-</script>
