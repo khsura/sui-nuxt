@@ -71,6 +71,6 @@ yarn dev:build       # build the playground
 
 ## Release
 
-Releases are automated by [release-please](https://github.com/googleapis/release-please). When conventional commits (`feat:`, `fix:` and so on) are merged to `main`, it opens a release PR that bumps the version and updates `CHANGELOG.md`. Merging that PR tags the release and publishes `@khsura/sui-nuxt` to public npm through **npm Trusted Publishing** (GitHub OIDC, configured on npmjs.com for `khsura/sui-nuxt` and `release-please.yaml`). No npm token or secret is involved, and npm attaches provenance automatically. `scripts/publishIfNew.mjs` skips a version that is already on npm.
+Releases are manual. Bump `version` in `package.json` and update `CHANGELOG.md` on `main`, then run `gh workflow run release-please.yaml --repo khsura/sui-nuxt`. The workflow publishes `@khsura/sui-nuxt` to public npm through **npm Trusted Publishing** (GitHub OIDC, configured on npmjs.com for `khsura/sui-nuxt` and `release-please.yaml`). No npm token or secret is involved, and npm attaches provenance automatically. `scripts/publishIfNew.mjs` skips a version that is already on npm.
 
 The registered components live in `src/components.ts`. `test/components.test.ts` fails when that list and the exports of the installed `@khsura/sui` differ, so update the list when you upgrade `@khsura/sui`.
